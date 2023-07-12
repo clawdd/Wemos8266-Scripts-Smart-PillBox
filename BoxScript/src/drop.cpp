@@ -2,6 +2,10 @@
 #include <Arduino.h>
 #include <Servo.h>
 
+/// @brief Moves the servo from the start to end postion to end postion again to drop a pill
+///
+/// @param servo The servo object
+/// @param servoPin The servo pin
 void moveServo(Servo servo, int servoPin) {
 
     for (int i = 0; i <= 180; i++)

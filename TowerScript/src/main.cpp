@@ -20,8 +20,8 @@ const int servoPin = D4;
 const int redLED = D5;
 
 // Wifi and server things
-const char* ssid = ""// SSID
-const char* password = ""// Password
+const char* ssid = ""; // SSID
+const char* password = ""; // Password
 
 // # # # define functions # # #
 

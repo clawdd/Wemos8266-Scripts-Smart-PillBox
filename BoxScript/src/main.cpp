@@ -64,7 +64,7 @@ const int whiteLED = D3;
 
 const int buttonPin = D0;
 
-const int buzzerPin = D6;
+const int buzzerPin = D6; 
 
 // WiFi and server things
 const char* ssid = ""; //Enter SSID
@@ -109,6 +109,8 @@ void handleStatisticsPage();
 void pillWarning();
 void changeDisplay(int page);
 
+void checkConnection(int pin);
+
 // time client
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
@@ -125,17 +127,15 @@ void onMessageCallback(WebsocketsMessage message) {
 
 void onEventsCallback(WebsocketsEvent event, String data) {
     if (event == WebsocketsEvent::ConnectionOpened) {
+        turnLEDOn(whiteLED);
         Serial.println("Connnection Opened");
     } else if (event == WebsocketsEvent::ConnectionClosed) {
+        turnLEDOff(whiteLED);
         Serial.println("Connnection Closed");
     } else if (event == WebsocketsEvent::GotPing) {
-        turnLEDOn(whiteLED);
         Serial.println("Got a Ping!");
     } else if (event == WebsocketsEvent::GotPong) {
-        turnLEDOff(whiteLED);
         client.close();
-        buzzPillDropped(buzzerPin, 200, 700);
-        Serial.println("Got a Pong!");
     }
 }
 
@@ -309,7 +309,6 @@ void handleSetPillAmount() {
     Serial.println("New total pill count: " + input);
     server.send(200, "text/plain", "task done");
     delay(1000);
-    buzzPillDropped(buzzerPin, 200, 700);
     turnLEDOff(yellowLED);
 }
 
@@ -338,7 +337,6 @@ void handleSetPillAmountServer() {
     Serial.println("New total pill count on server: " + (String)totalPillCountServer);
     server.send(200, "text/plain", "task done");
     delay(1000);
-    buzzPillDropped(buzzerPin, 200, 700);
     turnLEDOff(yellowLED);
 }
 
@@ -390,7 +388,6 @@ void handleSinglePillDrop() {
     server.send(200, "text/plain", "Pill dropped successfully.");
 
     displayProgressAnimation(100);
-    buzzPillDropped(buzzerPin, 200, 700);
     Serial.println("Dropping single pill finished");
     pillWarning();
 
@@ -399,7 +396,9 @@ void handleSinglePillDrop() {
         buzzSimpleSignal(buzzerPin, 200, 700, 1000, 3);
         displayPillsEmptyWithAnim(totalPillCount, totalPillCountServer);
         page = 2;
+        return;
     }
+    buzzPillDropped(buzzerPin, 200, 700);
 }
 
 
@@ -449,7 +448,8 @@ void handleSinglePillDropServer() {
         buzzSimpleSignal(buzzerPin, 200, 700, 1000, 3);
         displayPillsEmptyWithAnim(totalPillCount, totalPillCountServer);
         page = 2;
-    } 
+        return;
+    }
 }
 
 void handleMultiplePillDropServer(int amount) {
@@ -521,7 +521,6 @@ void handleSpecifiedPillDropServer() {
     pillDropWrapperServer(buildNumber(amount));
 }
 
-
 void handleRootPage() {
     server.send(200, "text/html", MAIN_page);
 }
@@ -533,6 +532,7 @@ void handleSetTimer() {
     String minutes = server.arg("minutes");
     String seconds = server.arg("seconds");
     String amountString = server.arg("boxAmount");
+
     int amount = buildNumber(amountString);
 
     String newTimer = createString(hours, minutes, seconds);
@@ -609,8 +609,8 @@ void handleLogout() {
 }
 
 void handleStatisticsPage() {
-    String statistics_page = getStatisticsPage(totalPillCount, totalPillCountServer, pillsDropped, timerCol, amountToDrop, timerColServer, amountToDropServer);
-    server.send(200, "text/html", statistics_page);
+    String page = getStatisticsPage(totalPillCount, totalPillCountPer, totalPillCountServer, totalPillCountServerPer, pillsDroppedBox, pillsDroppedServer, timerCol, checkTimers, amountToDrop, timerColServer, checkTimersServer, amountToDropServer, timeClient.getFormattedTime());
+    server.send(200, "text/html", page);
 }
 
 void pillWarning() {

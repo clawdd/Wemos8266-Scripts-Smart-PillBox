@@ -10,6 +10,9 @@
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
 
+/// @brief Displayes a give String aligned in the middle of the screen
+///
+/// @param text the desired text to be displayed
 void displayNewText(String text) {
     Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
@@ -25,6 +28,8 @@ void displayNewText(String text) {
     display.display();
 }
 
+/// @brief Plays the anim when the box is booting up using the bitmaps in the bitmaps.h file
+///
 void playBootingUpAnim() {
     Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
     display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -59,6 +64,9 @@ void playBootingUpAnim() {
     display.display();
 }
 
+
+/// @brief Calls all functions to display the text sequence + animation at the start
+///
 void displayStartingText() {
     displayNewText("Booting up");
     delay(1000);
@@ -77,6 +85,9 @@ void displayStartingText() {
     delay(1000);
 }
 
+/// @brief Displays a progress bar to the desired progress point given to the function
+///
+/// @param progress The progress as int
 void displayProgressAnimation(int progress) {
   Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -105,6 +116,14 @@ void displayProgressAnimation(int progress) {
   display.display();
 }
 
+/// @brief Displays the current box information for the user
+///
+/// @param pillCountBox The current pill count
+/// @param pillCountPer The last set pill count
+/// @param pillsDropped All pills dropped from the box since the last reset
+/// @param timeVector A vector array containing all timers set
+/// @param checkTimers A check vector for the timer
+/// @param currentTime The current timer provided by the time client
 void displayBoxInformation(int pillCountBox, int pillCountPer, int pillsDropped, const std::vector<String>& timeVector,
                            const std::vector<int>& checkTimers, String currentTime) {
   String pillCountString = String(pillCountBox);
@@ -153,8 +172,17 @@ void displayBoxInformation(int pillCountBox, int pillCountPer, int pillsDropped,
   display.display();
 }
 
+/// @brief Displays the current tower information for the user
+///
+/// @param pillCountBox The current pill count
+/// @param pillCountPer The last set pill count
+/// @param pillsDropped All pills dropped from the tower since the last reset
+/// @param timeVector A vector array containing all timers set
+/// @param checkTimers A check vector for the timer
+/// @param currentTime The current timer provided by the time client
 void displayServerInformation(int pillCountBox, int pillCountPer, int pillsDropped, const std::vector<String>& timeVector,
                            const std::vector<int>& checkTimers, String currentTime) {
+                            
   String pillCountString = String(pillCountBox);
   String pillCountPerString = String(pillCountPer);
   String pillsDroppedString = String(pillsDropped);
@@ -201,6 +229,8 @@ void displayServerInformation(int pillCountBox, int pillCountPer, int pillsDropp
   display.display();
 }
 
+/// @brief Displays the warning sequence when the pill count drops under the specified treshhold (30 and 50 percent)
+///
 void displayWarning () {
 
     Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
@@ -225,6 +255,10 @@ void displayWarning () {
     display.display();
 }
 
+/// @brief Displays the pills status screen
+///
+/// @param totalPillCount the current pill count inside the box
+/// @param totalPillCountServer the current pill count insied the tower
 void displayPillsEmpty(int totalPillCount, int totalPillCountServer) {
 
     Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
@@ -284,6 +318,10 @@ void displayPillsEmpty(int totalPillCount, int totalPillCountServer) {
     display.display();
 }
 
+/// @brief Gets called when the pills just got empty to play a small animation before showing the pills empty screen again
+///
+/// @param totalPillCount the current pill count inside the box
+/// @param totalPillCountServer the current pill count inside the tower
 void displayPillsEmptyWithAnim(int totalPillCount, int totalPillCountServer) {
 
     Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);

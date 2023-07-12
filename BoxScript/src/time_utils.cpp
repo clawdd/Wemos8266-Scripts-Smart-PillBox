@@ -4,6 +4,14 @@
 #include <Arduino.h>
 #include <time_utils.h>
 
+/// @brief Adds a new time to the given vector arrays
+///
+/// @param newTime the new time 
+/// @param timeVector the vector array containing the time
+/// @param checkTimers a check vector array deciding if the timer already was used or not
+/// @param currentTime the current time
+/// @param amountToDrop a vector array containing the amount to be dropped
+/// @param amount the amount to be dropped
 void addNewTime(String newTime, std::vector<String>& timeVector, std::vector<int>& checkTimers,
                 String currentTime, std::vector<int>& amountToDrop, int amount) {
 
@@ -18,8 +26,11 @@ void addNewTime(String newTime, std::vector<String>& timeVector, std::vector<int
     amountToDrop.push_back(amount);
 }
 
-//resets all times to unused
 
+/// @brief resets all timer to be unused
+///
+/// @param checkTimers1 the vector array containing the box / tower timer
+/// @param checkTimers2 the vector array containing the box / tower timer
 void resetAllTimes(std::vector<int>& checkTimers1, std::vector<int>& checkTimers2) {
 
     for (size_t i = 0; i < checkTimers1.size(); i++)
@@ -33,6 +44,9 @@ void resetAllTimes(std::vector<int>& checkTimers1, std::vector<int>& checkTimers
     }
 }
 
+/// @brief resets all timer of the box or the tower
+///
+/// @param checkTimers the vector array thats has been chosen to be reseted
 void resetAllTimesSpecific(std::vector<int>& checkTimers) {
 
     for (size_t i = 0; i < checkTimers.size(); i++)

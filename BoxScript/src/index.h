@@ -2,7 +2,7 @@
 
 // # # # System control page # # #
 
-const char MAIN_page[] = R"=====(
+const char MAIN_page[] PROGMEM = R"=====(
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -889,7 +889,7 @@ const char MAIN_page[] = R"=====(
 
 //# # # login page # # #
 
-const char* LOGIN_page = R"(
+const char LOGIN_page[] PROGMEM = R"=====(
 <!DOCTYPE html>
 <html lang="en">
 
@@ -988,45 +988,4 @@ const char* LOGIN_page = R"(
 </body>
 
 </html>
-)";
-
-//# # # Statistics page as static string + + +
-
-const char* STATISTIC_page = R"(
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Pill Dispenser Statistics</title>
-</head>
-<body>
-
-<h1>Pill Dispenser Statistics</h1>
-
-<div class="pill-count">
-  <h2>Current Pill Count:</h2>
-  <p id="pillCount">Loading...</p>
-</div>
-
-<script type="text/javascript">
-
-  // Function to retrieve the current pill count
-  function getCurrentPillCount() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (xhttp.readyState === 4 && xhttp.status === 200) {
-        var pillCount = JSON.parse(xhttp.responseText).count;
-        document.getElementById("pillCount").textContent = pillCount;
-      }
-    };
-    xhttp.open("GET", "/getPillCount", true);
-    xhttp.send();
-  }
-
-  // Call the function to retrieve the current pill count
-  getCurrentPillCount();
-
-</script>
-
-</body>
-</html>
-)";
+)=====";
