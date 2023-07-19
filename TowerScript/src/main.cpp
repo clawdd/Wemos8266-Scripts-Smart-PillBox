@@ -20,8 +20,8 @@ const int servoPin = D4;
 const int redLED = D5;
 
 // Wifi and server things
-const char* ssid = ""; // SSID
-const char* password = ""; // Password
+const char* ssid = "IASWlan"; // SSID
+const char* password = "kekw1234"; // Password
 
 // # # # define functions # # #
 
@@ -41,8 +41,8 @@ WebsocketsClient client;
 void setup() {
 
   Serial.begin(115200);
-  // Connect to wifi
   WiFi.begin(ssid, password);
+  WiFi.setOutputPower(5);
 
   Serial.print("Connecting to WiFi ");
 
