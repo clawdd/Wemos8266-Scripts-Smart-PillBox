@@ -1,0 +1,49 @@
+body {
+    margin:0;
+    padding:0;
+    background-color: #ECEEEF;
+}
+
+.card {
+  border-color: white;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+
+.uppercard {
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.form-group {
+  margin: 5px;
+}
+
+.btn {
+  margin-left: 10px;;
+  outline-color: #7895B2;
+  transition: transform 0.3s ease;
+}
+
+.form-control {
+  border-color: #80B2C9;
+  margin-bottom: 5px;
+}
+
+.form-control::placeholder {
+  color: #BCBEBF;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
+
+.custom {
+  margin: 5px;
+}

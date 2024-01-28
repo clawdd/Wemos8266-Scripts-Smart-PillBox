@@ -1,0 +1,108 @@
+body {
+    margin:0;
+    padding:0;
+    background-color: #ECEEEF;
+}
+
+.cards {
+  background-color: black;
+  aspect-ratio : 1 / 1;
+  border-radius: 10px;
+}
+
+.borders {
+  padding: 20px;
+  border-color: red;
+}
+
+.navbar{
+  margin-left: 10px;
+  margin-top: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px
+}
+
+.btn {
+  margin-left: 10px;;
+  outline-color: #7895B2;
+  transition: transform 0.3s ease;
+}
+
+.form-control {
+  border-color: #80B2C9;
+  margin-bottom: 5px;
+}
+
+.form-control::placeholder {
+  color: #BCBEBF;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
+
+.header {
+  background-color: #92A9BD;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.notific {
+  align-items: center;
+}
+
+.card {
+  border-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+.alerts {
+  margin: 5px;
+}
+
+.customRow {
+  margin-left: 10px;
+}
+
+.custom-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.alert {
+  /* Add animation styles */
+  animation-name: popup;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+.boxCards {
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

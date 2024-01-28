@@ -1,8 +1,3 @@
-#include <Arduino.h>
-
-// # # # System control page # # #
-
-const char MAIN_page[] PROGMEM = R"=====(
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -414,8 +409,6 @@ const char MAIN_page[] PROGMEM = R"=====(
         xhttp.send();
       }
 
-      <!-- ######################################################################################## -->
-
 
       function sendResetTimerServer() {
 
@@ -449,8 +442,6 @@ const char MAIN_page[] PROGMEM = R"=====(
         xhttp.open("GET", "/resetTimerServer", true);
         xhttp.send();
       }
-
-      <!-- ######################################################################################## -->
 
 
       function sendDeleteTimer() {
@@ -486,8 +477,6 @@ const char MAIN_page[] PROGMEM = R"=====(
         xhttp.send();
       }
 
-      <!-- ######################################################################################## -->
-
 
       function sendDeleteTimerServer() {
 
@@ -521,9 +510,6 @@ const char MAIN_page[] PROGMEM = R"=====(
         xhttp.open("GET", "/deleteTimerServer", true);
         xhttp.send();
       }
-
-      <!-- ######################################################################################## -->
-
 
       function sendPillInputRequest() {
         var pillAmountBox = document.getElementById("inputFieldPillBox").value;
@@ -562,8 +548,6 @@ const char MAIN_page[] PROGMEM = R"=====(
         xhttp.open("GET", "/inputPillAmountBox?input=" + pillAmountBox, true);
         xhttp.send();
       }
-
-      <!-- ######################################################################################## -->
 
 
       function sendPillInputRequestServer() {
@@ -604,8 +588,6 @@ const char MAIN_page[] PROGMEM = R"=====(
         xhttp.send();
       }
 
-      <!-- ######################################################################################## -->
-
 
         function sendSingleDropRequest() {
           var xhttp = new XMLHttpRequest();
@@ -640,8 +622,6 @@ const char MAIN_page[] PROGMEM = R"=====(
           xhttp.send();
         }
 
-        <!-- ######################################################################################## -->
-
         function sendSingleDropRequestServer() {
           var xhttp = new XMLHttpRequest();
 
@@ -675,8 +655,6 @@ const char MAIN_page[] PROGMEM = R"=====(
           xhttp.open("GET", "/singelPillDropServer", true);
           xhttp.send();
         }
-
-        <!-- ######################################################################################## -->
 
 
         function sendSpecifiedPillDrop() {
@@ -718,8 +696,6 @@ const char MAIN_page[] PROGMEM = R"=====(
           }
         }
 
-        <!-- ######################################################################################## -->
-
 
         function sendSpecifiedPillDropServer() {
           var specifiedAmount = document.getElementById("specifiedDropServer").value;
@@ -759,8 +735,6 @@ const char MAIN_page[] PROGMEM = R"=====(
 
           }
         }
-
-        <!-- ######################################################################################## -->
 
         function sendTimer() {
           var hours = document.getElementById("hours").value;
@@ -802,8 +776,6 @@ const char MAIN_page[] PROGMEM = R"=====(
           xhttp.open("GET", "/setTimer?hours=" + hours + "&minutes=" + minutes + "&seconds=" + seconds + "&boxAmount=" + boxAmount, true);
           xhttp.send();
         }
-
-        <!-- ######################################################################################## -->
 
         function sendServerTimer() {
           var serverHours = document.getElementById("serverHours").value;
@@ -847,14 +819,10 @@ const char MAIN_page[] PROGMEM = R"=====(
           xhttp.send();
         }
 
-        <!-- ######################################################################################## -->
-
 
         function redirectToStatistics() {
           window.location.href = "/statistics";
         }
-
-        <!-- ######################################################################################## -->
 
 
         function validateTime(hours, minutes, seconds) {
@@ -868,13 +836,9 @@ const char MAIN_page[] PROGMEM = R"=====(
           return false;
         }
 
-        <!-- ######################################################################################## -->
-
         function validateAmount(amount) {
           return amount > 0;
         }
-
-        <!-- ######################################################################################## -->
 
         function logout() {
           window.location.href = "/login";
@@ -885,106 +849,3 @@ const char MAIN_page[] PROGMEM = R"=====(
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
-)=====";
-
-//# # # login page # # #
-
-const char LOGIN_page[] PROGMEM = R"=====(
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LOGIN</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <style media="screen">
-    body {
-        margin:0;
-        padding:0;
-        background-color: #ECEEEF;
-    }
-
-    .card {
-      border-color: white;
-      box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-    }
-
-    .uppercard {
-      box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-    }
-
-    .card-body {
-      text-align: center;
-    }
-
-    .form-group {
-      margin: 5px;
-    }
-
-    .btn {
-      margin-left: 10px;;
-      outline-color: #7895B2;
-      transition: transform 0.3s ease;
-    }
-
-    .form-control {
-      border-color: #80B2C9;
-      margin-bottom: 5px;
-    }
-
-    .form-control::placeholder {
-      color: #BCBEBF;
-    }
-
-    .btn:hover {
-      transform: scale(1.1);
-    }
-
-    .btn:active {
-      transform: scale(0.9);
-    }
-
-    .custom {
-      margin: 5px;
-    }
-  </style>
-</head>
-
-<body data-bs-theme="light">
-
-  <div class="container d-flex align-items-center justify-content-center min-vh-100">
-    <div class="row d-flex flex-column">
-      <div class="col-md-6 custom">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Authenticate</h5>
-            <form class="form-group" action="/login" method="POST">
-              <input class="form-control" type="text" id="username" name="username" placeholder="username">
-              <input class="form-control" type="password" id="password" name="password" placeholder="password">
-              <input class="btn btn-dark" type="submit" value="Login">
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 custom">
-        <div class="card customCard" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">or continue without as</h5>
-            <h6 class="card-subtitle mb-2 text-muted">user / patient</h6>
-              <form action="/statistics">
-                <input class="btn btn-dark btn-block" type="submit" value="View plan">
-              </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-
-  </script>
-</body>
-</html>
-)=====";
